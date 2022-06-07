@@ -18,6 +18,8 @@ decimal.addEventListener("click", () => {
   addDecimal();
 });
 
+window.addEventListener("keydown", handleKeyPress);
+
 equal.addEventListener("click", () => {
   if (currentNum != "" && previousNum != "") {
     compute();
@@ -44,11 +46,11 @@ function handleNumber(number){
 
 operators.forEach((btn) => {
     btn.addEventListener("click",(e) => {
-        handleOpeator(e.target.textContent)
+        handleOperator(e.target.textContent)
     })
 })
 
-function handleOpeator(op){
+function handleOperator(op){
     if(previousNum === ""){
         previousNum = currentNum
         operatorCheck(op)
@@ -140,5 +142,30 @@ function handleDelete() {
     if (currentNum === "" && previousNum !== "" && operator === "") {
       previousNum = previousNum.slice(0, -1);
       currentDisplayNumber.textContent = previousNum;
+    }
+  }
+
+  function handleKeyPress(e) {
+    e.preventDefault();
+    if (e.key >= 0 && e.key <= 9) {
+      handleNumber(e.key);
+    }
+    if (
+      e.key === "Enter" ||
+      (e.key === "=" && currentNum != "" && previousNum != "")
+    ) {
+      compute();
+    }
+    if (e.key === "+" || e.key === "-" || e.key === "/") {
+      handleOperator(e.key);
+    }
+    if (e.key === "*") {
+      handleOperator("x");
+    }
+    if (e.key === ".") {
+      addDecimal();
+    }
+    if (e.key === "Backspace") {
+      handleDelete();
     }
   }
