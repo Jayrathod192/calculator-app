@@ -1,10 +1,9 @@
-let currentNumber = ""
-let previousNumber = ""
+let currentNum = ""
+let previousNum = ""
 let operator = ""
 
 const currentDisplayNumber = document.querySelector(".current-number")
 const previousDisplayNumber = document.querySelector(".previous-number")
-
 const btns = document.querySelectorAll(".number")
 const operators = document.querySelectorAll(".operator")
 const equal = document.querySelector(".equal")
@@ -14,8 +13,13 @@ clear.addEventListener("click", reset);
 const del = document.querySelector(".del")
 del.addEventListener("click",handleDelete)
 
+const decimal = document.querySelector(".decimal");
+decimal.addEventListener("click", () => {
+  addDecimal();
+});
+
 equal.addEventListener("click", () => {
-  if (currentNumber != "" && previousNumber != "") {
+  if (currentNum != "" && previousNum != "") {
     compute();
   }
 });
@@ -27,14 +31,14 @@ btns.forEach((btn) => {
 })
 
 function handleNumber(number){
-    if(previousNumber !== "" && currentNumber !== "" && operator === ""){
-        previousNumber = ""
-        currentDisplayNumber.textContent = currentNumber
+    if(previousNum !== "" && currentNum !== "" && operator === ""){
+        previousNum = ""
+        currentDisplayNumber.textContent = currentNum
     }
-    if(currentNumber.length <= 11)
+    if(currentNum.length <= 11)
     {
-        currentNumber += number
-        currentDisplayNumber.textContent = currentNumber
+        currentNum += number
+        currentDisplayNumber.textContent = currentNum
     }
 }
 
@@ -45,52 +49,53 @@ operators.forEach((btn) => {
 })
 
 function handleOpeator(op){
-    if(previousNumber === ""){
-        previousNumber = currentNumber
+    if(previousNum === ""){
+        previousNum = currentNum
         operatorCheck(op)
     }
-    else if(currentNumber === ""){
+    else if(currentNum === ""){
         operatorCheck(op)
     }
     else{
         compute()
         operator = op
         currentDisplayNumber.textContent = "0"
-        previousDisplayNumber.textContent = previousNumber + " " + operator
+        previousDisplayNumber.textContent = previousNum + " " + operator
     }
 }
 
 function operatorCheck(text){
     operator = text
-    previousDisplayNumber.textContent = previousNumber + " " + operator
+    previousDisplayNumber.textContent = previousNum + " " + operator
     currentDisplayNumber.textContent =  "0"
-    currentNumber = ""
+    currentNum = ""
 }
 
 
 function compute(){
-    previousNumber = Number(previousNumber)
-    currentNumber = Number(currentNumber)
+    previousNum = Number(previousNum)
+    currentNum = Number(currentNum)
 
     if(operator === "+"){
-        previousNumber += currentNumber
+        previousNum += currentNum
     }
     else if(operator === "-"){
-        previousNumber -= currentNumber
+        previousNum -= currentNum
     }
     else if(operator === "x"){
-        previousNumber *= currentNumber
+        previousNum *= currentNum
     }
     else if(operator === "/"){
-        if(currentNumber <= 0){
-            previousNumber == "CAN'T DIVIDE BY ZERO"
+        if(currentNum <= 0){
+            previousNum = "ERROR"
             displayResults()
+            window.setTimeout(reset,2000)
             return
         }
-        previousNumber /= currentNumber
+        previousNum /= currentNum
     }
-    previousNumber = roundNumber(previousNumber)
-    previousNumber = previousNumber.toString()
+    previousNum = roundNumber(previousNum);
+    previousNum = previousNum.toString();
     displayResults()
 }
 
@@ -99,35 +104,41 @@ function roundNumber(num) {
 }
 
 function displayResults() {
-    if (previousNumber.length <= 11) {
-      currentDisplayNumber.textContent = previousNumber;
+    if (previousNum.length <= 11) {
+      currentDisplayNumber.textContent = previousNum;
     } else {
-      currentDisplayNumber.textContent = previousNumber.slice(0, 11) + "...";
+      currentDisplayNumber.textContent = previousNum.slice(0, 11) + "...";
     }
     previousDisplayNumber.textContent = "";
     operator = "";
-    currentNumber = "";
+    currentNum = "";
   }
 
 function reset() {
-        currentNumber = "";
-        previousNumber = "";
+        currentNum = "";
+        previousNum = "";
         operator = "";
         currentDisplayNumber.textContent = "0";
         previousDisplayNumber.textContent = "";
 }
 
+function addDecimal() {
+    if (!currentNum.includes(".")) {
+      currentNum += ".";
+      currentDisplayNumber.textContent = currentNum;
+    }
+  }
 
 function handleDelete() {
-    if (currentNumber !== "") {
-      currentNumber = currentNumber.slice(0, -1);
-      currentDisplayNumber.textContent = currentNumber;
-      if (currentNumber === "") {
+    if (currentNum !== "") {
+      currentNum = currentNum.slice(0, -1);
+      currentDisplayNumber.textContent = currentNum;
+      if (currentNum === "") {
         currentDisplayNumber.textContent = "0";
       }
     }
-    if (currentNumber === "" && previousNumber !== "" && operator === "") {
-      previousNumber = previousNumber.slice(0, -1);
-      currentDisplayNumber.textContent = previousNumber;
+    if (currentNum === "" && previousNum !== "" && operator === "") {
+      previousNum = previousNum.slice(0, -1);
+      currentDisplayNumber.textContent = previousNum;
     }
   }
