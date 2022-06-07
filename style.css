@@ -1,0 +1,123 @@
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    color: #ccc;
+
+}
+body{
+    font-family: 'League Spartan', sans-serif; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5rem;
+    background-color: hsl(222, 26%, 31%);
+}
+
+.container{  
+    /* background-color: #ccc; */
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.header{
+    /* width: 90%;  */
+    height: 8rem;
+    margin: 0 auto;
+    background-color: hsl(224, 36%, 15%);
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.previous-number,
+.current-number{
+    font-size: 2.6rem;
+    color: #fff;
+}
+
+.header h1{
+    position: absolute;
+    top:5rem;
+    right: 2rem;
+}
+
+.header h3{
+    position: absolute;
+    top:1rem;
+    right:2rem;
+}
+.body{
+    /* width: 90%;   */
+    margin: 1rem auto;
+    background-color: hsl(223, 31%, 20%);
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    padding: 2rem;
+    border-radius: 1.2rem;
+    gap: 1rem;
+}
+
+.buttons{
+    /* width: 5rem; */
+    /* height: 5rem; */
+    padding: 1.2rem 2.4rem;
+    margin: .5rem;
+    background-color: hsl(30, 25%, 89%);
+    /* justify-self: center; */
+    border:none;
+    border-radius: 1rem;
+    color:hsl(221, 14%, 31%);
+    font-size: 2.4rem;
+    font-weight: 700;
+    box-shadow: 0 2px hsl(28, 16%, 65%);
+    
+}
+
+.buttons:hover{
+    background-color: hsl(30, 25%, 100%);
+    cursor: pointer;
+}
+
+.del{
+    padding: .8rem 1.6rem;
+    background-color: hsl(225, 21%, 49%);
+    color: hsl(30, 25%, 800%);
+    box-shadow: 0 2px hsl(224, 28%, 35%);
+}
+
+.del:hover,
+.reset:hover{
+    background-color: hsl(225, 25%, 59%);
+}
+.reset{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding: 1.4 2.8rem;  
+    border-radius: 1.2rem; 
+    background-color: hsl(225, 21%, 49%);
+    color: hsl(30, 25%, 100%);
+    box-shadow: 0 2px hsl(224, 28%, 35%);
+}
+.equal{
+    grid-column-start: 3;
+    grid-column-end: 5;
+    padding: 1.4 2.8rem;  
+    border-radius: 1.2rem;
+    background-color: hsl(6, 63%, 50%);
+    color: hsl(30, 25%, 100%);
+    box-shadow: 0 2px hsl(6, 70%, 34%);
+}
+
+.equal:hover{
+    background-color: hsl(4, 73%, 55%);
+}
